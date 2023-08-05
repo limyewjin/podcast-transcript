@@ -56,10 +56,42 @@ def write_summary(topic, text):
   return api.generate_response(messages, model="gpt-4")
 
 def find_topics(text):
-  messages = [
-    {"role": "system", "content": "You are a helpful assistant in understanding and labeling topics from timestampped text."},
-    {"role": "user", "content": f"{text}\n--\nConvert the provided timestamped podcast transcript into topic-level summaries with associated timelines. Timestamps should be in the format [MM:SS.MS]-[MM:SS.MS]. Topics must represent significant segments lasting at least one minute. The output format is 'MM:SS - Topic 1\nMM:SS - Topic 2\n...'. For instance: '00:00 - Supply and demand\n02:44 - Competition for AI hardware\n...' Begin by understanding the transcript's content, identify topic shifts, and write a concise summary for each segment ensuring its duration meets the minimum requirement."}]
-  return api.generate_response(messages, model="gpt-4")
+  responses = []
+  rating = "bad"
+  while len(responses) < 3 and rating == "bad":
+    request = f"""{text}\n--\nFor the provided podcast transcript with timestamps:
+
+1. Create topic-level summaries accompanied by their associated timelines.
+2. The input timestamps are in the format `[MM:SS.MS]-[MM:SS.MS]`.
+3. Each summarized topic should:
+   - Last **at least 1 minute** in duration. Avoid creating segments shorter than this.
+   - Represent a significant and distinct segment of the podcast. Merge overlapping or closely related topics to eliminate redundancy.
+   - Accurately encapsulate the core idea of that segment without being overly granular.
+4. Format the output as: `MM:SS - Topic Description`, each on a new line. 
+   Example: 
+00:00 - Introduction to the podcast
+01:00 - The rise of AI in modern tech
+... and so on.
+5. Before summarizing, thoroughly comprehend the transcript content. Identify when the topic shifts, and ensure each segment meets the minimum duration requirement. Avoid splitting closely related topics unless there's a clear thematic shift."""
+    if len(responses) > 0:
+      rationale, suggestions = responses[-1]
+      request += f" Your last response was {topics} but was rejected due to {rationale} with the following suggestions {suggestions}."
+
+    messages = [
+      {"role": "system", "content": "You are a helpful assistant in understanding and labeling topics from timestampped text."},
+      {"role": "user", "content": request}]
+    topics = api.generate_response(messages, model="gpt-4")
+    print(topics)
+
+    response = api.is_good_response(topics, "Examine the provided topic-level podcast summary with its associated timelines in MM:SS timestamps. All topics are supposed to be at least 1 minute long. Do all summarized topics last at least 1 minute? Highlight any segments that do not meet this duration criterion. Think about it and call the `is_good_response` function to process.")
+    print(response)
+
+    rating = response.get("rating")
+    rationale = response.get("rationale")
+    suggestions = response.get("suggestions")
+    responses.append((rationale, suggestions))
+
+  return topics
 
 def extract_timestamps(timestamps_text):
   messages = [{'role': 'system', 'content': f"You are a helpful AI which extracts timestamps from timestampped text."},

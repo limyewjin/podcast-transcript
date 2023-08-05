@@ -169,8 +169,13 @@ def is_good_response(response, question, model='gpt-4'):
                           "type": "string",
                           "description": "rationale for the rating given",
                       },
+                      "suggestions": {
+                          "type": "string",
+                          "description": "suggestions to improve response",
+                      },
+
                   },
-                  "required": ["rating", "rationale"],
+                  "required": ["rating", "rationale", "suggestions"],
               },
           }
       ]
