@@ -43,6 +43,18 @@ def format_text(topic, text):
     {"role": "user", "content": f"The topic is {topic}\nNext is the transcript of a podcast for this topic:\n{text}\n--\nReformat the provided timestamped podcast transcript into logical sentences and paragraphs. The input text format should be in the format [MM:SS.MS]-[MM:SS.MS] <text>. The output format is 'MM:SS - Paragraph 1\nMM:SS - Paragraph 2\n...' Write the reformatted text."}]
   return api.generate_response(messages, model="gpt-4")
 
+def remove_timestamp(topic, text):
+  messages = [
+    {"role": "system", "content": "You are a helpful assistant in re-formatting text to be more readable."},
+    {"role": "user", "content": f"The topic is {topic}\nNext is the transcript of a podcast for this topic:\n{text}\n--\nReformat the provided timestamped podcast transcript to remove the timestamps and form into paragraphs. The input text format should be in the format [MM:SS.MS]-[MM:SS.MS] <text>. The output format is 'Paragraph 1\nParagraph 2\n...' Write the reformatted text."}]
+  return api.generate_response(messages, model="gpt-3.5-turbo")
+
+def write_summary(topic, text):
+  messages = [
+    {"role": "system", "content": "You are a helpful assistant in providing useful and insightful summaries."},
+    {"role": "user", "content": f"The topic is {topic}\nNext is the transcript of a podcast for this topic:\n{text}\n--\nProvide useful and insightful summary of the text in point-form using Markdown format."}]
+  return api.generate_response(messages, model="gpt-4")
+
 def find_topics(text):
   messages = [
     {"role": "system", "content": "You are a helpful assistant in understanding and labeling topics from timestampped text."},
@@ -103,7 +115,8 @@ def main():
   parser = argparse.ArgumentParser(description="Format podcast transcript from Whisper API.")
   parser.add_argument("file", type=str, help="Input Whisper API timestamped JSON.")
   parser.add_argument("--timestamps_file", type=str, help="Text file containing timestamps.")
-  parser.add_argument("--output_file", type=str, default="output.txt", help="Output filename.")
+  parser.add_argument("--output_transcript_file", type=str, default="output_transcript.txt", help="Output filename for transcript.")
+  parser.add_argument("--output_summary_file", type=str, default="output_summary.txt", help="Output filename for summary.")
   args = parser.parse_args()
 
   with open(args.file, "r") as f:
@@ -184,7 +197,9 @@ def main():
 
   print(topics_text)
 
+  # Write transcript file
   output = []
+  final_timestamp_texts = []
   for t in range(len(topics)):
     print(topics[t])
     timestamp_texts = []
@@ -196,10 +211,26 @@ def main():
 
     timestamp_text = '\n'.join(timestamp_texts)
     formatted_text = format_text(topics[t][2], timestamp_text)
+    final_timestamp_texts.append(formatted_text)
     print(formatted_text)
     output.append(f"# Timeline - {topics[t][0]:02}:{topics[t][1]:02} - {topics[t][2]}\n\n[Transcript]\n\n{formatted_text}")
 
-  with open(args.output_file, "w") as f:
+  with open(args.output_transcript_file, "w") as f:
+    f.write('\n\n\n'.join(output))
+
+  # Write summaries
+  summaries = []
+  output = []
+  for t in range(len(topics)):
+    print(topics[t])
+
+    no_timestamp_text = remove_timestamp(topics[t][2], final_timestamp_texts[t])
+    summary = write_summary(topics[t][2], no_timestamp_text)
+    print(summary)
+    summaries.append(summary)
+    output.append(f"# Timeline - {topics[t][0]:02}:{topics[t][1]:02} - {topics[t][2]}\n\n[Summary]\n\n{summary}")
+
+  with open(args.output_summary_file, "w") as f:
     f.write('\n\n\n'.join(output))
   
 

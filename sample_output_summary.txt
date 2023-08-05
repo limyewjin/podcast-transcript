@@ -1,0 +1,72 @@
+# Timeline - 00:08 - Introduction and Episode Overview
+
+[Summary]
+
+- Hosts: Dave (Radio Guy) and Matilda (Radio Gal).
+- The podcast covers latest updates from the world of technology and science.
+- The episode was recorded on a Saturday morning in the Bay Area.
+- Topics to be discussed in the episode:
+  - A deep dive into brown and green programming languages and how developers' preferences might be influenced by their projects.
+  - A groundbreaking advancement in bioelectronic medicine where developers have successfully implanted microchips into the brain of a paralyzed man, restoring movement and sensations in his hand.
+  - A study suggesting that the aroma of coffee could have a significant impact on cognitive capacity during sleep.
+- The hosts will also discuss other stories making headlines in the week.
+
+
+# Timeline - 01:28 - Exploring 'Green' and 'Brown' Programming Languages
+
+[Summary]
+
+- The podcast discusses the concept of 'green' and 'brown' programming languages, introduced by software engineer Adam Gordon-Bell.
+- 'Green' languages are more likely to be used in new projects, while 'brown' languages are often used in maintenance work. This classification is based on the TOB index, which measures the popularity of programming languages.
+- The distinction between dreaded and loved languages is often due to the maintenance aspect. Old code bases can become complex and harder to understand over time, leading to dread.
+- Bell introduces a concept known as Joel's Law, named after Joel Spolsky, which states that all non-trivial abstractions, to some degree, are leaky. This can lead to software defects and contribute to the complexity of old code bases.
+- Bell's analysis shows that 83% of the dreaded languages are brown, while 54% of the loved languages are green. This highlights the challenges of working with legacy code and potential bias in evaluating programming languages.
+- The context in which a language is used can influence decisions about the adoption of new programming languages or the management of legacy code.
+- Recent trends in programming are moving towards artificial intelligence, machine learning, and big data, with languages like Python and Scala gaining popularity.
+- The classification of a language as 'green' or 'brown' may shift over time as technology trends evolve.
+- The podcast emphasizes that there's more to programming languages than just syntax and functionality, highlighting the importance of the human element in programming.
+
+
+# Timeline - 05:28 - Revolutionary Bioelectronic Medicine for Paralysis
+
+[Summary]
+
+- The Feinstein Institutes have developed a revolutionary bioelectronic medicine technology, a double neural bypass, that has restored movement and sensation in a man living with quadriplegia.
+- Quadriplegia, historically an irreversible condition, is paralysis from the neck down caused by damage to the spinal cord.
+- The double neural bypass technology combines molecular medicine, neuroscience, and biomedical engineering. It uses brain implants, artificial intelligence, and stimulation technology.
+- The process involves a microchip implanted in the brain picking up thoughts about movement. These signals are sent to a computer, which interprets them and sends signals to electrode patches over the spine and hand muscles, stimulating them.
+- Sensory feedback is sent back to the brain via tiny sensors at the fingertips and palms, completing the double neural bypass.
+- The first beneficiary of this technology is Keith Thomas, a 45-year-old man who was paralyzed from the chest down after a diving accident in 2020. He can now move his arms at will and feel touch.
+- Keith has also started to see some natural recovery from his injuries, with his arm strength more than doubling and new sensations in his forearm and wrist.
+- The technology could potentially forge new pathways at the injury site, leading to potentially permanent recovery.
+- The Feinstein Institutes aim to advance new bioelectronic technologies to treat a range of diseases and injuries, including arthritis, pulmonary hypertension, Crohn's disease, and diabetes.
+- The development of this technology is a testament to the power of science and technology, and offers hope for people living with paralysis.
+
+
+# Timeline - 08:52 - Exploring Fragrance-Induced Cognitive Enhancement
+
+[Summary]
+
+- The podcast discusses a study conducted by the UCI Center for the Neurobiology of Learning and Memory, which found that exposing older adults to different fragrances while they slept led to a significant increase in cognitive performance.
+- Participants aged between 60 and 85 were given a diffuser and seven cartridges, each containing a different natural oil. They put a different cartridge into their diffuser each evening before going to bed, and it activated for two hours as they slept.
+- The loss of olfactory capacity can predict the development of nearly 70 neurological and psychiatric diseases, including Alzheimer's and other forms of dementia, Parkinson's, schizophrenia, and alcoholism.
+- The UCI study is unique because it simplified the method of exposure to scents, reducing the number of different scents to only seven—one for each night—leveraging our ability to perceive smells during sleep.
+- The study's findings are practical as cognitive performance improved during sleep, making it an easily accessible method for individuals.
+- The group exposed to the full-strength fragrances showed a 226% increase in cognitive performance compared to the control group.
+- Imaging revealed better integrity in the brain's left uncinate fasciculus, a pathway connecting the medial temporal lobe to the decision-making prefrontal cortex. This pathway tends to become less robust with age.
+- Participants also reported sleeping more soundly.
+- The study offers a simple, non-invasive technique for strengthening memory and potentially deterring dementia.
+- The team is keen to investigate the technique's impact on people already diagnosed with cognitive loss.
+- A product based on their study, designed for people to use at home, is expected to come onto the market this fall.
+- The researchers hope this study will spur more investigations into olfactory therapies for memory impairment.
+
+
+# Timeline - 13:44 - Conclusion and Encouragement to Explore
+
+[Summary]
+
+- The podcast covers a range of topics including programming languages, advancements in bioelectronic medicine, and the cognitive impact of coffee aroma.
+- The hosts, Dave and Matilda, aim to spark curiosity and inspire listeners to explore these topics further.
+- They acknowledge that not every story can be covered in depth, but hope their discussions have been enlightening.
+- The episode concludes with a thank you to the listeners for joining them on this journey of discovery.
+- The hosts encourage listeners to continue exploring, questioning, and learning as the world of technology, science, and beyond is always evolving.

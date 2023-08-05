@@ -16,13 +16,13 @@ This project utilizes OpenAI's Whisper and GPT APIs to accurately transcribe, ne
 2. Follow the script inside the notebook.
 3. For timestamp integrations, use:
 ```
-$ python format.py --timestamps_file timestamps.txt podcast_transcript.json
+$ python process.py --timestamps_file timestamps.txt podcast_transcript.json
 ```
 
 ## 🎧 Example
 Check out a sample podcast [sample_podcast.mp3](https://github.com/limyewjin/podcast-transcript/blob/main/sample_podcast.mp3) and the resulting transcript [sample_podcast.json](https://github.com/limyewjin/podcast-transcript/blob/main/sample_podcast.json). Podcast episode is from one of my auto-generated podcasts [YJ's Podcast #8](https://yjs-podcast.simplecast.com/episodes/yjs-podcast-8-aug-5-2023).
 
-Refer to [sample_timestamps.txt](https://github.com/limyewjin/podcast-transcript/blob/main/sample_timestamps.txt) for the timestamp data, and see the final [sample_output.txt](https://github.com/limyewjin/podcast-transcript/blob/main/sample_output.txt) for a well-formatted transcript.
+Refer to [sample_timestamps.txt](https://github.com/limyewjin/podcast-transcript/blob/main/sample_timestamps.txt) for the timestamp data, and see the final [sample_output_transcript.txt](https://github.com/limyewjin/podcast-transcript/blob/main/sample_output_transcript.txt) for a well-formatted transcript, and [sample_output_summary.txt](https://github.com/limyewjin/podcast-transcript/blob/main/sample_output_summary.txt)
 
 ### Breaking the Example down
 
@@ -58,7 +58,7 @@ The timestamp data is: [sample_timestamps.txt](https://github.com/limyewjin/podc
 13:44 - Conclusion and Encouragement to Explore
 ```
 
-Sample output is [sample_output.txt](https://github.com/limyewjin/podcast-transcript/blob/main/sample_output.txt)
+Sample transcript output is [sample_output_transcript.txt](https://github.com/limyewjin/podcast-transcript/blob/main/sample_output_transcript.txt)
 
 ```
  Timeline - 00:08 - Introduction and Episode Overview
@@ -79,6 +79,26 @@ Sample output is [sample_output.txt](https://github.com/limyewjin/podcast-transc
 
 01:44 - This concept comes from a blog post by Adam Gordon-Bell, a software engineer with over 14 years of experience. He has a passion for functional programming and type systems. Currently, Adam works on static analysis of Docker containers at Tenable, but those are just his day jobs.
 ```
+
+Sample summary output is [sample_output_summary.txt](https://github.com/limyewjin/podcast-transcript/blob/main/sample_output_summary.txt)
+
+```
+# Timeline - 05:28 - Revolutionary Bioelectronic Medicine for Paralysis
+
+[Summary]
+
+- The Feinstein Institutes have developed a revolutionary bioelectronic medicine technology, a double neural bypass, that has restored movement and sensation in a man living with quadriplegia.
+- Quadriplegia, historically an irreversible condition, is paralysis from the neck down caused by damage to the spinal cord.
+- The double neural bypass technology combines molecular medicine, neuroscience, and biomedical engineering. It uses brain implants, artificial intelligence, and stimulation technology.
+- The process involves a microchip implanted in the brain picking up thoughts about movement. These signals are sent to a computer, which interprets them and sends signals to electrode patches over the spine and hand muscles, stimulating them.
+- Sensory feedback is sent back to the brain via tiny sensors at the fingertips and palms, completing the double neural bypass.
+- The first beneficiary of this technology is Keith Thomas, a 45-year-old man who was paralyzed from the chest down after a diving accident in 2020. He can now move his arms at will and feel touch.
+- Keith has also started to see some natural recovery from his injuries, with his arm strength more than doubling and new sensations in his forearm and wrist.
+- The technology could potentially forge new pathways at the injury site, leading to potentially permanent recovery.
+- The Feinstein Institutes aim to advance new bioelectronic technologies to treat a range of diseases and injuries, including arthritis, pulmonary hypertension, Crohn's disease, and diabetes.
+- The development of this technology is a testament to the power of science and technology, and offers hope for people living with paralysis.
+```
+
 
 # 🤝 Contribution
 We welcome and appreciate any contributions or suggestions to improve the tool. If you find any issues or see potential enhancements, feel free to open an issue or submit a pull request.

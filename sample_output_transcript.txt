@@ -51,7 +51,7 @@
 
 04:57 - The green or brown classification of a language may shift over time as these trends continue to evolve. Fascinating stuff, Matilda. It's a reminder that there's more to programming languages than just syntax and functionality. There's also a human element to consider.
 
-05:15 - Couldn't have said it better myself, Dave. And that's our deep dive into green and brown programming languages. We hope it's given you some food for thought.
+05:15 - And that's our deep dive into green and brown programming languages. We hope it's given you some food for thought.
 
 
 # Timeline - 05:28 - Revolutionary Bioelectronic Medicine for Paralysis
@@ -60,9 +60,9 @@
 
 05:28 - Moving on to our next story, we're about to dive into a story that's nothing short of electrifying. It's a tale of technology, medicine, and human resilience.
 
-05:39 - We're delving into a biomedical marvel, a double neural bypass that has restored movement and sensation in a man living with quadriplegia. For those who might not be familiar, quadriplegia is a condition that results in paralysis from the neck down, caused by damage to the spinal cord. Historically, it's been an irreversible condition. But that's where the Feinstein Institutes come in.
+05:39 - We're delving into a biomedical marvel, a double neural bypass that has restored movement and sensation in a man living with quadriplegia. For those who might not be familiar, quadriplegia is a condition that results in paralysis from the neck down, caused by damage to the spinal cord. Historically, it's been an irreversible condition.
 
-06:01 - They've been pioneering the field of bioelectronic medicine, which combines molecular medicine, neuroscience, and biomedical engineering. Their latest achievement is a double neural bypass, a groundbreaking technology that employs brain implants, artificial intelligence, and stimulation technology.
+06:01 - But that's where the Feinstein Institutes come in. They've been pioneering the field of bioelectronic medicine, which combines molecular medicine, neuroscience, and biomedical engineering. Their latest achievement is a double neural bypass, a groundbreaking technology that employs brain implants, artificial intelligence, and stimulation technology.
 
 06:23 - Let's break it down a bit. When our study participant, Keith Thomas, thinks about moving his arm or hand, his thoughts are picked up by a microchip implanted in his brain. These signals are then sent to a computer, which interprets them and corresponds to Keith's desired movement. The computer then sends signals to highly flexible, noninvasive electrode patches placed over Keith's spine and hand muscles. This stimulates his muscles and promotes function and recovery.
 
@@ -99,15 +99,13 @@
 
 10:17 - If this concept of smell and memory is so well established, what makes the UCI study so unique, Dave?
 
-10:23 - You could say the beauty of this research lies in its simplicity, Matilda. The researchers realized that it's not realistic for older adults or people with cognitive impairment to be exposed to a large range of scents every day. So they simplified the method.
+10:23 - You could say the beauty of this research lies in its simplicity, Matilda. The researchers realized that it's not realistic for older adults or people with cognitive impairment to be exposed to a large range of scents every day. So they simplified the method. They reduced the number of different scents to only seven—one for each night—leveraging our ability to perceive smells during sleep.
 
-10:41 - They reduced the number of different scents to only seven—one for each night—leveraging our ability to perceive smells during sleep. And this drastic simplification made the study's findings crucially practical. Cognitive performance improved during sleep, making it an easily accessible method for individuals.
+10:52 - That's correct, Dave. And this drastic simplification made the study's findings crucially practical. Cognitive performance improved during sleep, making it an easily accessible method for individuals.
 
-11:03 - The study's first author, Cynthia Wu, emphasized that making it possible for people to experience the odors while asleep eliminated the need for dedicated time for this during waking hours. And the results were nothing short of astounding.
+11:03 - The study's first author, Cynthia Wu, emphasized that making it possible for people to experience the odors while asleep eliminated the need for dedicated time for this during waking hours. And the results were nothing short of astounding. The group exposed to the full-strength fragrances showed a 226% increase in cognitive performance compared to the control group.
 
-11:18 - The group exposed to the full-strength fragrances showed a 226% increase in cognitive performance compared to the control group. That's a huge leap. But it's not just about the numbers.
-
-11:33 - Imaging revealed better integrity in the brain's left uncinate fasciculus, a pathway connecting the medial temporal lobe to the decision-making prefrontal cortex. This pathway tends to become less robust with age. So not only did the participants' cognitive performance improve, but their brain health did too.
+11:29 - That's a huge leap. It certainly is, Dave. But it's not just about the numbers. Imaging revealed better integrity in the brain's left uncinate fasciculus, a pathway connecting the medial temporal lobe to the decision-making prefrontal cortex. This pathway tends to become less robust with age. So not only did the participants' cognitive performance improve, but their brain health did too.
 
 11:56 - And let's not forget the added bonus. Participants also reported sleeping more soundly. It's a win-win situation.
 
@@ -115,27 +113,31 @@
 
 12:19 - And this fascinating study isn't stopping here. The team is keen to investigate the technique's impact on people already diagnosed with cognitive loss.
 
-12:31 - That's the other grand revelation, Dave. The researchers hope this study will spur more investigations into olfactory therapies for memory impairment.
+12:28 - That's the other grand revelation, Dave. The researchers hope this study will spur more investigations into olfactory therapies for memory impairment.
 
 12:38 - We're also excited to note a product based on their study, designed for people to use at home, is expected to come onto the market this fall. Talk about transforming science into tangible, real-world impact.
 
 12:50 - A decade ago, who could have imagined that we'd be talking about strengthening memory and deterring dementia with something as pleasant and effortless as falling asleep amid gentle aromas? Yet, here we are.
 
-13:01 - And it's all thanks to the tireless curiosity and innovation of scientists like those at the UCI Center for the Neurobiology of Learning and Memory. And with this study, they've once again proven their commitment to pushing the boundaries of our understanding of the brain.
+13:01 - And it's all thanks to the tireless curiosity and innovation of scientists like those at the UCI Center for the Neurobiology of Learning and Memory. That's right, Dave. And with this study, they've once again proven their commitment to pushing the boundaries of our understanding of the brain.
 
 13:17 - We're excited to see where their research takes them next. Indeed, Matilda. It's a fascinating story, and it just goes to show how much we still have to learn about the brain and the senses.
 
-13:32 - But for now, it's time for us to wrap up this deep dive. We hope you've enjoyed this journey into the world of cognitive science and the power of fragrance. Well, that's a wrap for today's episode of YJ's podcast.
+13:28 - But for now, it's time for us to wrap up this deep dive. We hope you've enjoyed this journey into the world of cognitive science and the power of fragrance. Well, that's a wrap for today's episode of YJ's podcast.
 
 
 # Timeline - 13:44 - Conclusion and Encouragement to Explore
 
 [Transcript]
 
-13:48 - We've covered some fascinating stories, haven't we, Matilda? Absolutely, Dave. We've explored the world of brown and green programming languages, delved into the groundbreaking advancement in bioelectronic medicine, and even pondered the cognitive impact of the aroma of coffee. Indeed, Matilda.
+13:48 - We've covered some fascinating stories, haven't we, Matilda? Absolutely, Dave.
 
-14:05 - It's been a journey of discovery, from the intricacies of coding to the frontiers of medical science and even into the realm of our morning coffee rituals. And while we can't cover every story in depth, we hope that our discussions today have sparked your curiosity and inspired you to explore these topics further.
+13:52 - We've explored the world of brown and green programming languages, delved into the groundbreaking advancement in bioelectronic medicine, and even pondered the cognitive impact of the aroma of coffee. Indeed, Matilda.
 
-14:22 - So, as we wrap up today's episode, we want to thank you for joining us on this journey of discovery. We hope you've enjoyed it as much as we have. 
+14:05 - It's been a journey of discovery, from the intricacies of coding to the frontiers of medical science and even into the realm of our morning coffee rituals.
+
+14:13 - And while we can't cover every story in depth, we hope that our discussions today have sparked your curiosity and inspired you to explore these topics further.
+
+14:22 - So, as we wrap up today's episode, we want to thank you for joining us on this journey of discovery. We hope you've enjoyed it as much as we have.
 
 14:31 - And remember, the world of technology, science, and beyond is always evolving. So, keep exploring, keep questioning, and keep learning.
