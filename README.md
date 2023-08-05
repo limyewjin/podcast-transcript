@@ -20,13 +20,13 @@ $ python format.py --timestamps_file timestamps.txt podcast_transcript.json
 ```
 
 ## 🎧 Example
-Check out a sample podcast [sample_podcast.mp3](https://github.com/limyewjin/podcast-transcript/blob/main/sample_podcast.mp3) and the resulting transcript [sample_podcast.json](https://github.com/limyewjin/podcast-transcript/blob/main/sample_podcast.json). 
+Check out a sample podcast [sample_podcast.mp3](https://github.com/limyewjin/podcast-transcript/blob/main/sample_podcast.mp3) and the resulting transcript [sample_podcast.json](https://github.com/limyewjin/podcast-transcript/blob/main/sample_podcast.json). Podcast episode is from one of my auto-generated podcasts [YJ's Podcast #8](https://yjs-podcast.simplecast.com/episodes/yjs-podcast-8-aug-5-2023).
 
 Refer to [sample_timestamps.txt](https://github.com/limyewjin/podcast-transcript/blob/main/sample_timestamps.txt) for the timestamp data, and see the final [sample_output.txt](https://github.com/limyewjin/podcast-transcript/blob/main/sample_output.txt) for a well-formatted transcript.
 
-See sample podcast [sample_podcast.mp3](https://github.com/limyewjin/podcast-transcript/blob/main/sample_podcast.mp3) which is from one of my auto-generated podcasts [YJ's Podcast #8](https://yjs-podcast.simplecast.com/episodes/yjs-podcast-8-aug-5-2023).
+### Breaking the Example down
 
-Running the colab on the podcast produces this transcript: [sample_podcast.json](https://github.com/limyewjin/podcast-transcript/blob/main/sample_podcast.json). Sample output below:
+Running the colab on the podcast produces the transcript: [sample_podcast.json](https://github.com/limyewjin/podcast-transcript/blob/main/sample_podcast.json). Sample output below:
 
 ```
 [
