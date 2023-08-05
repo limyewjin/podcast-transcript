@@ -7,12 +7,12 @@ This project utilizes OpenAI's Whisper and GPT APIs to accurately transcribe, ne
 * Formatting: Clean and structure the raw transcriptions into a reader-friendly format.
 * Summarization: Extract the main points and themes from your transcriptions using OpenAI's GPT API.
 
+# Getting Started
+To get started, click on the 'Open in Colab' button. This will take you to the colab notebook that contains the script to run the program.
+
 <a target="_blank" href="https://colab.research.google.com/github/limyewjin/podcast-transcript/blob/main/podcast_transcript.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-
-# Getting Started
-To get started, click on the 'Open in Colab' button. This will take you to the colab notebook that contains the script to run the program.
 
 # Contribution
 We welcome and appreciate any contributions or suggestions to improve the tool. If you find any issues or see potential enhancements, feel free to open an issue or submit a pull request.
