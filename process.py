@@ -64,13 +64,13 @@ def find_topics(text):
 1. Create topic-level summaries accompanied by their associated timelines.
 2. The input timestamps are in the format `[MM:SS.MS]-[MM:SS.MS]`.
 3. Each summarized topic should:
-   - Last **at least 1 minute** in duration. Avoid creating segments shorter than this.
+   - Last **at least 2 minutes** in duration. Avoid creating segments shorter than this.
    - Represent a significant and distinct segment of the podcast. Merge overlapping or closely related topics to eliminate redundancy.
    - Accurately encapsulate the core idea of that segment without being overly granular.
 4. Format the output as: `MM:SS - Topic Description`, each on a new line. 
    Example: 
 00:00 - Introduction to the podcast
-01:00 - The rise of AI in modern tech
+02:00 - The rise of AI in modern tech
 ... and so on.
 5. Before summarizing, thoroughly comprehend the transcript content. Identify when the topic shifts, and ensure each segment meets the minimum duration requirement. Avoid splitting closely related topics unless there's a clear thematic shift."""
     if len(responses) > 0:
@@ -83,7 +83,7 @@ def find_topics(text):
     topics = api.generate_response(messages, model="gpt-4")
     print(topics)
 
-    response = api.is_good_response(topics, "Examine the provided topic-level podcast summary with its associated timelines in MM:SS timestamps. All topics are supposed to be at least 1 minute long. Do all summarized topics last at least 1 minute? Highlight any segments that do not meet this duration criterion. Think about it and call the `is_good_response` function to process.")
+    response = api.is_good_response(topics, "Examine the provided topic-level podcast summary with its associated timelines in MM:SS timestamps. All topics are supposed to be at least 2 minutes long. Do all summarized topics last at least 2 minutes? Highlight any segments that do not meet this duration criterion. Think about it and call the `is_good_response` function to process.")
     print(response)
 
     rating = response.get("rating")
