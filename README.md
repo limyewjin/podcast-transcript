@@ -14,10 +14,12 @@ This project utilizes OpenAI's Whisper and GPT APIs to accurately transcribe, ne
 ## 📖 Getting Started
 1. Click 'Open in Colab' to access the Colab notebook.
 2. Follow the script inside the notebook.
-3. For timestamp integrations, use:
+3. For timestamp integrations and summarization, use:
 ```
 $ python process.py --timestamps_file timestamps.txt podcast_transcript.json
 ```
+
+See output transcript and summary in files specified by `--output_transcript_file` (default `output_transcript.txt`) and `--output_summary_file` (default `output_summary.txt`).
 
 ## 🎧 Example
 Check out a sample podcast [sample_podcast.mp3](https://github.com/limyewjin/podcast-transcript/blob/main/sample_podcast.mp3) and the resulting transcript [sample_podcast.json](https://github.com/limyewjin/podcast-transcript/blob/main/sample_podcast.json). Podcast episode is from one of my auto-generated podcasts [YJ's Podcast #8](https://yjs-podcast.simplecast.com/episodes/yjs-podcast-8-aug-5-2023).
