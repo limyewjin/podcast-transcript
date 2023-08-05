@@ -9,7 +9,7 @@ This project utilizes OpenAI's Whisper and GPT APIs to accurately transcribe, ne
 ## 🚀 Features
 * Transcription: Convert your audio files into written text using OpenAI's Whisper API.
 * Formatting: Clean and structure the raw transcriptions into a reader-friendly format.
-* Summarization (Upcoming!): Extract the main points and themes from your transcriptions using OpenAI's GPT API.
+* Summarization: Extract the main points and themes from your transcriptions using OpenAI's GPT API.
 
 ## 📖 Getting Started
 1. Click 'Open in Colab' to access the Colab notebook.
