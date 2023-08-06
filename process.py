@@ -57,7 +57,7 @@ def remove_timestamp(topic, text):
 def write_summary(topic, text):
   messages = [
     {"role": "system", "content": "You are a helpful assistant in providing useful and insightful summaries."},
-    {"role": "user", "content": f"The topic is {topic}\nNext is the transcript of a podcast for this topic:\n{text}\n--\nProvide useful and insightful summary of the text in point-form using Markdown format."}]
+    {"role": "user", "content": f"The topic is {topic}\nNext is the transcript of a podcast for this topic:\n{text}\n--\nProvide useful and insightful summary of the text in point-form of up to 3 top points using Markdown format."}]
   return api.generate_response(messages, model="gpt-4")
 
 def find_topics(text):
