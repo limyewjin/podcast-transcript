@@ -267,7 +267,7 @@ def main():
     formatted_text = format_text(topics[t][3], timestamp_text)
     final_timestamp_texts.append(formatted_text)
     print(formatted_text)
-    output.append(f"# Timeline - {topics[t][0]:02}:topics[t][1]:02}:{topics[t][2]:02} - {topics[t][3]}\n\n[Transcript]\n\n{formatted_text}")
+    output.append(f"# Timeline - {topics[t][0]:02}:{topics[t][1]:02}:{topics[t][2]:02} - {topics[t][3]}\n\n[Transcript]\n\n{formatted_text}")
 
   with open(args.output_transcript_file, "w") as f:
     f.write('\n\n\n'.join(output))
