@@ -5,12 +5,14 @@ load_dotenv()
 
 import argparse
 import json
+import math
 import sys
 
 import api
 
-THRESHOLD = 3000
-USE_HOUR = False
+THRESHOLD = 3600
+USE_HOUR = True
+MIN_DURATION_IN_MIN = 2
 
 def get_timestamp(seconds):
     assert seconds >= 0, "non-negative timestamp expected"
@@ -63,40 +65,38 @@ def find_topics(text):
   hour_example = "00:" if USE_HOUR else ""
   responses = []
   rating = "bad"
-  while len(responses) < 3 and rating == "bad":
-    request = f"""{text}\n--\nFor the provided podcast transcript with timestamps:
+  print("============ find_topics START==============")
+  print(text)
+  print("============ find_topics END ==============")
+  
+  request = f"""{text}\n--\nFor the provided podcast transcript with timestamps:
 
-1. Create topic-level summaries accompanied by their associated timelines.
+1. Create up to 3 topics for this section accompanied by their associated timelines.
 2. The input timestamps are in the format `[{hour_text}MM:SS.MS]-[{hour_text}MM:SS.MS]`.
-3. Each summarized topic should:
-   - Be 1-5 word topic text and cover around 2-5 minutes of audio.
-   - Last **at least 2 minutes** in duration. Avoid creating segments shorter than this.
+3. Each topic has the requirements:
+   - Be 1-5 word topic text
    - Represent a significant and distinct segment of the podcast. Merge overlapping or closely related topics to eliminate redundancy.
    - Accurately encapsulate the core idea of that segment without being overly granular.
-   - Time constraints do not apply to advertisements.
 4. Format the output as: `{hour_text}MM:SS - Topic Description`, each on a new line. 
    Example: 
 {hour_example}00:00 - Introduction to the podcast
-{hour_example}02:00 - The rise of AI in modern tech
+{hour_example}{MIN_DURATION_IN_MIN:02}:00 - The rise of AI in modern tech
 ... and so on.
 5. Before summarizing, thoroughly comprehend the transcript content. Identify when the topic shifts, and ensure each segment meets the minimum duration requirement. Avoid splitting closely related topics unless there's a clear thematic shift."""
-    if len(responses) > 0:
-      rationale, suggestions = responses[-1]
-      request += f" Your last response was {topics} but was rejected due to {rationale} with the following suggestions {suggestions}."
-
-    messages = [
-      {"role": "system", "content": "You are a helpful assistant in understanding and labeling topics from timestampped text."},
-      {"role": "user", "content": request}]
+  messages = [
+    {"role": "system", "content": "You are a helpful assistant in understanding and labeling topics from timestampped text."},
+    {"role": "user", "content": request}]
+  responses = []
+  while len(responses) < 3:
     topics = api.generate_response(messages, model="gpt-4")
+    num_newlines = topics.count("\n")
     print(topics)
-
-    response = api.is_good_response(topics, "Examine the provided topic-level podcast summary with its associated timelines in {hour_text}MM:SS timestamps. All topics are supposed to be at least 2 minutes long except for advertisements. Do all such summarized topics last at least 2 minutes? Highlight any segments that do not meet this duration criterion. Topics are also supposed to be 1-5 words of topic text. Do all such summarized topics meet that text criteria? Think about it and call the `is_good_response` function to process.")
-    print(response)
-
-    rating = response.get("rating")
-    rationale = response.get("rationale")
-    suggestions = response.get("suggestions")
-    responses.append((rationale, suggestions))
+    print(f"num_newlines: {num_newlines}")
+    print()
+    if num_newlines <= 2: break
+    responses.append(topics)
+    messages.append({"role": "assistant", "content": topics})
+    messages.append({"role": "user", "content": f"Your response has {num_newlines} lines, which means you created more than 3 topics. Please create at most 3 topics and output `{hour_text}MM:SS - Topic Description`, each on a new line. Do not apologize, just respond with the timeline and topics."})
 
   return topics
 
@@ -171,8 +171,12 @@ def main():
   last_item = input_json[-1]
   last_end_time = last_item["end"]
   last_hour, last_minute, last_second, last_milisecond = get_timestamp(last_end_time)
-  global USE_HOUR
-  USE_HOUR = last_hour > 0
+  print(f"Last timestamp: {format_timestamp(last_end_time)}")
+  global MIN_DURATION_IN_MIN
+  num_minutes = last_hour * 60 + last_minute
+  # want at most 10 topics.
+  MIN_DURATION_IN_MIN = int(math.ceil(float(num_minutes) / 10))
+  print(f"MIN_DURATION_IN_MIN: {MIN_DURATION_IN_MIN}")
  
   timestamps_text = ""
   if args.timestamps_file:
