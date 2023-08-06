@@ -19,29 +19,33 @@ def text_to_chunks(text: str, token_limit: int, overlap: int, model: str = "gpt-
     if overlap >= token_limit:
         raise ValueError("Overlap should be less than the token limit.")
 
-    text_tokens = num_tokens_from_string(text, model)
+    # Use a tokenizer to convert the text to tokens
+    encoding = tiktoken.encoding_for_model(model)
+    tokens = encoding.encode(text)
 
-    if text_tokens <= token_limit:
+    # If the total number of tokens is within the limit, just return the original text
+    if len(tokens) <= token_limit:
         return [text]
 
     chunks = []
     start = 0
-    while start < len(text):
-        end = start + token_limit
-        if end >= len(text):
-            chunks.append(text[start:])
+    while start < len(tokens):
+        # Try to take as many tokens as the limit allows
+        end = min(start + token_limit, len(tokens))
+
+        # Create a chunk with the current set of tokens and add it to the list
+        chunk_tokens = tokens[start:end]
+        chunk_text = encoding.decode(chunk_tokens)
+        chunks.append(chunk_text)
+
+        # If we're at the end of the text, we're done
+        if end == len(tokens):
             break
 
-        chunk = text[start:end].strip()
-        overlap_start = max(0, end - overlap)
-        while num_tokens_from_string(text[overlap_start:end], model) > overlap:
-            overlap_start -= 1
-
-        chunks.append(chunk)
-        start = overlap_start
+        # Otherwise, we create an overlap with the next chunk
+        start = max(0, end - overlap)
 
     return chunks
-
 
 @retry(stop_max_attempt_number=3, wait_exponential_multiplier=100, wait_exponential_max=1000)
 def get_next_step(messages, functions, function_call='auto', model='gpt-3.5-turbo-0613'):
