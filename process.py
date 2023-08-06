@@ -10,6 +10,7 @@ import sys
 import api
 
 THRESHOLD = 3000
+USE_HOUR = False
 
 def get_timestamp(seconds):
     assert seconds >= 0, "non-negative timestamp expected"
@@ -38,15 +39,17 @@ def format_timestamp(
     )
 
 def format_text(topic, text):
+  hour_text = "HH:" if USE_HOUR else ""
   messages = [
     {"role": "system", "content": "You are a helpful assistant in re-formatting text to be more readable."},
-    {"role": "user", "content": f"The topic is {topic}\nNext is the transcript of a podcast for this topic:\n{text}\n--\nReformat the provided timestamped podcast transcript into logical sentences and paragraphs. The input text format should be in the format [MM:SS.MS]-[MM:SS.MS] <text>. The output format is 'MM:SS - Paragraph 1\nMM:SS - Paragraph 2\n...' Write the reformatted text."}]
+    {"role": "user", "content": f"The topic is {topic}\nNext is the transcript of a podcast for this topic:\n{text}\n--\nReformat the provided timestamped podcast transcript into logical sentences and paragraphs. The input text format should be in the format [{hour_text}MM:SS.MS]-[{hour_text}MM:SS.MS] <text>. The output format is '{hour_text}MM:SS - Paragraph 1\nMM:SS - Paragraph 2\n...' Write the reformatted text."}]
   return api.generate_response(messages, model="gpt-4")
 
 def remove_timestamp(topic, text):
+  hour_text = "HH:" if USE_HOUR else ""
   messages = [
     {"role": "system", "content": "You are a helpful assistant in re-formatting text to be more readable."},
-    {"role": "user", "content": f"The topic is {topic}\nNext is the transcript of a podcast for this topic:\n{text}\n--\nReformat the provided timestamped podcast transcript to remove the timestamps and form into paragraphs. The input text format should be in the format [MM:SS.MS]-[MM:SS.MS] <text>. The output format is 'Paragraph 1\nParagraph 2\n...' Write the reformatted text."}]
+    {"role": "user", "content": f"The topic is {topic}\nNext is the transcript of a podcast for this topic:\n{text}\n--\nReformat the provided timestamped podcast transcript to remove the timestamps and form into paragraphs. The input text format should be in the format [{hour_text}MM:SS.MS]-[{hour_text}MM:SS.MS] <text>. The output format is 'Paragraph 1\nParagraph 2\n...' Write the reformatted text."}]
   return api.generate_response(messages, model="gpt-3.5-turbo")
 
 def write_summary(topic, text):
@@ -56,21 +59,25 @@ def write_summary(topic, text):
   return api.generate_response(messages, model="gpt-4")
 
 def find_topics(text):
+  hour_text = "HH:" if USE_HOUR else ""
+  hour_example = "00:" if USE_HOUR else ""
   responses = []
   rating = "bad"
   while len(responses) < 3 and rating == "bad":
     request = f"""{text}\n--\nFor the provided podcast transcript with timestamps:
 
 1. Create topic-level summaries accompanied by their associated timelines.
-2. The input timestamps are in the format `[MM:SS.MS]-[MM:SS.MS]`.
+2. The input timestamps are in the format `[{hour_text}MM:SS.MS]-[{hour_text}MM:SS.MS]`.
 3. Each summarized topic should:
+   - Be 1-5 word topic text and cover around 2-5 minutes of audio.
    - Last **at least 2 minutes** in duration. Avoid creating segments shorter than this.
    - Represent a significant and distinct segment of the podcast. Merge overlapping or closely related topics to eliminate redundancy.
    - Accurately encapsulate the core idea of that segment without being overly granular.
-4. Format the output as: `MM:SS - Topic Description`, each on a new line. 
+   - Time constraints do not apply to advertisements.
+4. Format the output as: `{hour_text}MM:SS - Topic Description`, each on a new line. 
    Example: 
-00:00 - Introduction to the podcast
-02:00 - The rise of AI in modern tech
+{hour_example}00:00 - Introduction to the podcast
+{hour_example}02:00 - The rise of AI in modern tech
 ... and so on.
 5. Before summarizing, thoroughly comprehend the transcript content. Identify when the topic shifts, and ensure each segment meets the minimum duration requirement. Avoid splitting closely related topics unless there's a clear thematic shift."""
     if len(responses) > 0:
@@ -83,7 +90,7 @@ def find_topics(text):
     topics = api.generate_response(messages, model="gpt-4")
     print(topics)
 
-    response = api.is_good_response(topics, "Examine the provided topic-level podcast summary with its associated timelines in MM:SS timestamps. All topics are supposed to be at least 2 minutes long. Do all summarized topics last at least 2 minutes? Highlight any segments that do not meet this duration criterion. Think about it and call the `is_good_response` function to process.")
+    response = api.is_good_response(topics, "Examine the provided topic-level podcast summary with its associated timelines in {hour_text}MM:SS timestamps. All topics are supposed to be at least 2 minutes long except for advertisements. Do all such summarized topics last at least 2 minutes? Highlight any segments that do not meet this duration criterion. Topics are also supposed to be 1-5 words of topic text. Do all such summarized topics meet that text criteria? Think about it and call the `is_good_response` function to process.")
     print(response)
 
     rating = response.get("rating")
@@ -108,6 +115,10 @@ def extract_timestamps(timestamps_text):
                         "type": "string",
                         "description": "Topic text",
                     },
+                    "hour": {
+                        "type": "integer",
+                        "description": "The hour of the start of the topic",
+                    },
                     "minute": {
                         "type": "integer",
                         "description": "The minute of the start of the topic",
@@ -117,7 +128,7 @@ def extract_timestamps(timestamps_text):
                         "description": "The second of the start of the topic",
                     },
                 },
-                "required": ["topic", "minute", "second"]
+                "required": ["topic", "hour", "minute", "second"]
             },
         }
     ]
@@ -127,9 +138,10 @@ def extract_timestamps(timestamps_text):
   while response.get("function_call"):
     function_args = json.loads(response["function_call"]["arguments"])
     topic = function_args.get("topic")
+    hour = function_args.get("hour")
     minute = function_args.get("minute")
     second = function_args.get("second")
-    topics.append((minute, second, topic))
+    topics.append((hour, minute, second, topic))
     messages.append(response)
     messages.append(
             {
@@ -155,6 +167,12 @@ def main():
     input_json_text = f.read()
 
   input_json = json.loads(input_json_text)
+
+  last_item = input_json[-1]
+  last_end_time = last_item["end"]
+  last_hour, last_minute, last_second, last_milisecond = get_timestamp(last_end_time)
+  global USE_HOUR
+  USE_HOUR = last_hour > 0
  
   timestamps_text = ""
   if args.timestamps_file:
@@ -167,7 +185,7 @@ def main():
       start_time = item["start"]
       end_time = item["end"]
       text = item["text"]
-      formatted_texts.append(f"[{format_timestamp(start_time)}]-[{format_timestamp(end_time)}] {text}")
+      formatted_texts.append(f"[{format_timestamp(start_time, USE_HOUR)}]-[{format_timestamp(end_time, USE_HOUR)}] {text}")
 
     topics = []
     start = 0
@@ -195,31 +213,31 @@ def main():
   for item in input_json:
     item["used"] = False
 
-  def is_within_segment(start_time, minute_mark, second_mark, next_minute_mark, next_second_mark):
-    start_segment_seconds = 60 * minute_mark + second_mark
-    end_segment_seconds = 60 * next_minute_mark + next_second_mark if next_minute_mark is not None else float('inf')
+  def is_within_segment(start_time, hour_mark, minute_mark, second_mark, next_hour_mark, next_minute_mark, next_second_mark):
+    start_segment_seconds = 3600 * hour_mark + 60 * minute_mark + second_mark
+    end_segment_seconds = 3600 * next_hour_mark + 60 * next_minute_mark + next_second_mark
 
     return start_segment_seconds <= start_time < end_segment_seconds
 
   topics_text = []
   for t in range(len(topics) - 1):
-    minute_mark, second_mark, topic_text = topics[t]
-    next_minute_mark, next_second_mark, _ = topics[t + 1]
+    hour_mark, minute_mark, second_mark, topic_text = topics[t]
+    next_hour_mark, next_minute_mark, next_second_mark, _ = topics[t + 1]
     
     text = []
     for item in input_json:
         start_time = item["start"]
-        if is_within_segment(start_time, minute_mark, second_mark, next_minute_mark, next_second_mark):
+        if is_within_segment(start_time, hour_mark, minute_mark, second_mark, next_hour_mark, next_minute_mark, next_second_mark):
             text.append(item)
         item["used"] = True
     topics_text.append(text)
   
   # Handle the text after the last segment
-  last_minute, last_second, _ = topics[-1]
+  last_hour, last_minute, last_second, _ = topics[-1]
   text = []
   for item in input_json:
       start_time = item["start"]
-      if start_time >= 60 * last_minute + last_second:
+      if start_time >= 3600 * last_hour + 60 * last_minute + last_second:
           text.append(item)
           item["used"] = True
   topics_text.append(text)
@@ -239,7 +257,7 @@ def main():
       start_time = item["start"]
       end_time = item["end"]
       text = item["text"]
-      timestamp_texts.append(f"[{format_timestamp(start_time)}]-[{format_timestamp(end_time)}] {text}")
+      timestamp_texts.append(f"[{format_timestamp(start_time, USE_HOUR)}]-[{format_timestamp(end_time, USE_HOUR)}] {text}")
 
     timestamp_text = '\n'.join(timestamp_texts)
     formatted_text = format_text(topics[t][2], timestamp_text)
