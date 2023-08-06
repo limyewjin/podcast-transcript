@@ -264,10 +264,10 @@ def main():
       timestamp_texts.append(f"[{format_timestamp(start_time, USE_HOUR)}]-[{format_timestamp(end_time, USE_HOUR)}] {text}")
 
     timestamp_text = '\n'.join(timestamp_texts)
-    formatted_text = format_text(topics[t][2], timestamp_text)
+    formatted_text = format_text(topics[t][3], timestamp_text)
     final_timestamp_texts.append(formatted_text)
     print(formatted_text)
-    output.append(f"# Timeline - {topics[t][0]:02}:{topics[t][1]:02} - {topics[t][2]}\n\n[Transcript]\n\n{formatted_text}")
+    output.append(f"# Timeline - {topics[t][0]:02}:topics[t][1]:02}:{topics[t][2]:02} - {topics[t][3]}\n\n[Transcript]\n\n{formatted_text}")
 
   with open(args.output_transcript_file, "w") as f:
     f.write('\n\n\n'.join(output))
@@ -278,11 +278,11 @@ def main():
   for t in range(len(topics)):
     print(topics[t])
 
-    no_timestamp_text = remove_timestamp(topics[t][2], final_timestamp_texts[t])
-    summary = write_summary(topics[t][2], no_timestamp_text)
+    no_timestamp_text = remove_timestamp(topics[t][3], final_timestamp_texts[t])
+    summary = write_summary(topics[t][3], no_timestamp_text)
     print(summary)
     summaries.append(summary)
-    output.append(f"# Timeline - {topics[t][0]:02}:{topics[t][1]:02} - {topics[t][2]}\n\n[Summary]\n\n{summary}")
+    output.append(f"# Timeline - {topics[t][0]:02}:{topics[t][1]:02}:{topics[t][2]:02} - {topics[t][3]}\n\n[Summary]\n\n{summary}")
 
   with open(args.output_summary_file, "w") as f:
     f.write('\n\n\n'.join(output))
